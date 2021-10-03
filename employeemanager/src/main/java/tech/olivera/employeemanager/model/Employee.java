@@ -1,17 +1,12 @@
 package tech.olivera.employeemanager.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import jdk.internal.ref.PhantomCleanable;
+import javax.persistence.*;
 
 @Entity
 public class Employee implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
     private String name;
