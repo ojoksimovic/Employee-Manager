@@ -77,7 +77,7 @@ public class Employee implements Serializable{
         return imageUrl;
     }
 
-    public void setImageUrl (Long imageUrl){
+    public void setImageUrl (String imageUrl){
         this.imageUrl = imageUrl;
     }
 
