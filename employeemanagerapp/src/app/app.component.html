@@ -12,7 +12,7 @@
         </li>
      </ul>
      <form class="form-inline my-2 my-lg-0">
-        <input type="search"
+        <input (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel type="search"
          name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search employees..." >
      </form>
   </div>
