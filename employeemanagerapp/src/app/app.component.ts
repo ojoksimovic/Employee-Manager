@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -10,11 +11,40 @@ import { EmployeeService } from './employee.service';
 })
 export class AppComponent implements OnInit{
   public employees!: Employee[];
+  public editEmployee!: Employee|null;
 
   constructor(private employeeService: EmployeeService){}
   ngOnInit(){
     this.getEmployees();
   }
+
+  public onAddEmployee(addForm:NgForm): void{
+    document.getElementById('add-employee-form')?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
+      }
+    )
+  }
+
+  public onUpdateEmployee(employee:Employee): void{
+    this.employeeService.updateEmployee(employee).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+  
   
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
@@ -27,7 +57,7 @@ export class AppComponent implements OnInit{
     );
   }
 
-  public onOpenModal(employee: Employee, mode: string): void {
+  public onOpenModal(employee: Employee| null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -37,10 +67,14 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#addEmployeeModal');
     }
     if (mode === 'edit') {
-      // this.editEmployee = employee;
+
+      // binds edit modal form with selected employee data
+      this.editEmployee = employee;
+
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      // binds delete modal with selected employee data
       // this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
