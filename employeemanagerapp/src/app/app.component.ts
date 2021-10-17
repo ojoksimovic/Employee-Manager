@@ -11,7 +11,8 @@ import { EmployeeService } from './employee.service';
 })
 export class AppComponent implements OnInit{
   public employees!: Employee[];
-  public editEmployee!: Employee|null;
+  public editEmployee!: Employee;
+  public deleteEmployee!: Employee;
 
   constructor(private employeeService: EmployeeService){}
   ngOnInit(){
@@ -44,6 +45,18 @@ export class AppComponent implements OnInit{
       }
     )
   }
+
+  public onDeleteEmployee(employeeId:number): void{
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
   
   
   public getEmployees(): void {
@@ -57,7 +70,7 @@ export class AppComponent implements OnInit{
     );
   }
 
-  public onOpenModal(employee: Employee| null, mode: string): void {
+  public onOpenModal(employee: Employee, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -74,8 +87,10 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+
       // binds delete modal with selected employee data
-      // this.deleteEmployee = employee;
+      this.deleteEmployee = employee;
+
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
     container?.appendChild(button);
