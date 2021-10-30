@@ -11,12 +11,13 @@
 	<groupId>tech.olivera.employees</groupId>
 	<artifactId>employeemanager</artifactId>
 	<version>0.0.1</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>employeemanager</name>
 	<description>Employee Manager App</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>11.0.13</java.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
