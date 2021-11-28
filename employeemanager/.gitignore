@@ -36,3 +36,5 @@ build/
 **/credentials.java
 **/ENV_VARIABLES
 **/data.txt
+**/employeemanager/pom.xml
+**/employeemanager/Procfile
