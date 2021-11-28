@@ -53,6 +53,12 @@
   <p>No Employees were found.</p>
 </div>
 </div>
+<div *ngIf="!employees" class="col-lg-12 col-md-12 col-xl-12">
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Loading!</h4>
+  <p>Waking up server... this make take up to 30 seconds. Please wait.</p>
+</div>
+</div>
 
 <!-- Add Employee Modal -->
 <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
